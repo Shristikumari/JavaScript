@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise in javascript</title>
+</head>
+<style>
+    body{
+        display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top:10%;
+ 
+    }
+     #container{
+            background-color: rgb(141, 63, 63);
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #inside h3{
+            margin-top: 30%;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        #inside{
+            background-color: white;
+            width: 320px;
+            height: 320px;
+            text-align: center;
+            border-radius: 5px;
+
+        }
+        #btn{
+            background-color:rgb(141, 63, 63);
+            border: none;
+            box-shadow: 2px 2px 2px gray;
+            border-radius: 5px;
+            width: 80px;
+            height: 30px;
+            color: white;
+            margin-top: 10%;
+        }
+</style>
+<body>
+    <div id="container">
+        <div id="inside">
+            <h3>Best joke to make your day</h3>
+            <div id="jokes">joke loading...</div>
+            <button id="btn">Next joke</button>
+    
+        </div>
+    </div>
+
+
+    <script>
+        //API URL: https://icanhazdadjoke.com/
+
+        const inside=document.querySelector("#inside");
+        const btn=document.querySelector("#btn");
+          
+        const getdadjoke = ()=>{
+
+             const setheasder={
+                  headers:{
+                      Accept:"application/json"
+                  }
+             }
+            fetch("https://icanhazdadjoke.com/" ,setheasder)
+            .then((res)=>
+             res.json()).then((data)=>{
+                jokes.innerHTML=data.joke;
+            }).catch((error)=>{
+                console.log(error);
+            })
+        }
+
+        btn.addEventListener("click",getdadjoke);
+        getdadjoke();
+    </script>
+</body>
+</html>
