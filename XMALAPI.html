@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest</title>
+</head>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+</style>
+<body>
+  <div id="container"></div>
+
+  <script>
+    const container=document.querySelector("#container");
+  
+  const request=new XMLHttpRequest();
+  request.open('GET',"https://restcountries.com/v2/name/india");
+  request.send();
+  
+  request.addEventListener('load',function(){
+  // const [data] = JSON.parse(this.responseText);
+  // console.log(this.responseText);
+  const [data] = JSON.parse(this.responseText);
+  // const data1=[data]
+  console.log(data);
+  const htmlData=`
+      <div class="card">
+        <img src="${data.flag}" alt="Avatar" style="width:100%">
+        <div class="container">
+        <h4><b>${data.name}</b></h4> 
+        <p>${data.region}</p> 
+        </div>
+        </div>
+  `;
+  container.insertAdjacentHTML("afterbegin",htmlData);
+  
+  })
+  </script>
+     
+</body>
+
+</html>
